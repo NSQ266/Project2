@@ -4,3 +4,5 @@
 target
 *.project
 >>>>>>> 3f425157a52752b5a02b5c54d3cd722a0a0e0671
+*.classpath
+.settings
