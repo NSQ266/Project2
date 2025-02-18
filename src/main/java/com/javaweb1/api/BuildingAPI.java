@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,9 +14,13 @@ import com.javaweb1.Model.BuildingDTO;
 import com.javaweb1.service.BuildingService;
 
 @RestController 
+@PropertySource("classpath:application.properties")
 public class BuildingAPI {
 	@Autowired
 	private BuildingService buildingService;
+	
+	@Value("${dev.nguyen}")
+	private String data;
 	
 	@GetMapping(value = "/api/building/")
 	public List<BuildingDTO> getbuilding(@RequestParam Map<String, Object> params,
@@ -31,11 +35,9 @@ public class BuildingAPI {
 //		}
 //	}
 	
-	
-	@DeleteMapping(value = "/api/building/{id}/{name}/")
-	public void deleteBuilding(@PathVariable Integer id,
-							   @PathVariable String name,
-							   @RequestParam(value = "ward", required = false) String ward) {
-		 System.out.println("Da xoa toa nha có id la" + id + " roi nhe!");
-	}
+//	
+//	@DeleteMapping(value = "/api/building/{id}")
+//	public void deleteBuilding(@PathVariable Integer id) {
+//		 System.out.print(data);
+//	}
 }

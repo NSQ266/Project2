@@ -2,6 +2,7 @@ package com.javaweb1.repository.impl;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 
 import com.javaweb1.builer.BuildingSearchBuilder;
@@ -17,7 +20,17 @@ import com.javaweb1.repository.entity.BuildingEntity;
 import com.javaweb1.utils.ConnectionJDBCUtil;
 
 @Repository
-public class BuilidingRepositoryImpl implements BuildingRepository {
+@PropertySource("classpath:application.properties")
+public class JDBCBuilidingRepositoryImpl implements BuildingRepository {
+	@Value("${spring.datasource.url}")
+	private String DB_URL; 
+	
+	@Value("${spring.datasource.username}")
+	private String USER;
+	
+	@Value("${spring.datasource.password}")
+	private String PASS;
+	
 	public static void joinTable(BuildingSearchBuilder buildingSearchBuilder, StringBuilder sql) {
 		Long staffId = buildingSearchBuilder.getStaffId();
 		if(staffId != null) {
@@ -109,7 +122,7 @@ public static void querySpecial(BuildingSearchBuilder buildingSearchBuilder, Str
 		where.append(" GROUP BY b.id;");
 		sql.append(where);
 		List<BuildingEntity> result = new ArrayList<>();
-		try(    Connection conn = ConnectionJDBCUtil.getConnection();
+		try(    Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql.toString());) {
 				
@@ -118,12 +131,11 @@ public static void querySpecial(BuildingSearchBuilder buildingSearchBuilder, Str
 				 buildingEntity.setId(rs.getLong("b.id"));
 				    buildingEntity.setName(rs.getString("b.name"));
 				    buildingEntity.setWard(rs.getString("b.ward"));
-				    buildingEntity.setDistrictid(rs.getLong("b.districtid"));
 				    buildingEntity.setStreet(rs.getString("b.street"));
-				    buildingEntity.setFloorArea(rs.getLong("b.floorarea"));
+//				    buildingEntity.setFloorArea(rs.getLong("b.floorarea"));
 				    buildingEntity.setRentPrice(rs.getLong("b.rentprice"));
-				    buildingEntity.setServiceFee(rs.getString("b.servicefee"));
-				    buildingEntity.setBrokerageFee(rs.getLong("b.brokeragefee"));
+//				    buildingEntity.setServiceFee(rs.getString("b.servicefee"));
+//				    buildingEntity.setBrokerageFee(rs.getLong("b.brokeragefee"));
 				    buildingEntity.setManagerName(rs.getString("b.managername"));
 				    buildingEntity.setManagerPhoneNumber(rs.getString("b.managerphonenumber"));
 				    result.add(buildingEntity);

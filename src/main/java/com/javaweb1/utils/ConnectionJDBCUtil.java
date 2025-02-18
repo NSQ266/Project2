@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 public class ConnectionJDBCUtil {
-	static final String DB_URL = "jdbc:mysql://localhost:3306/estatebasic";
+	static String DB_URL = "jdbc:mysql://localhost:3306/estatabasic"; 
 	static final String USER = "root";
 	static final String PASS = "123456";
 	
