@@ -15,20 +15,19 @@ import jakarta.persistence.Query;
 
 @Repository
 @Primary
-public class BuildingRepositoryImpl implements BuildingRepository{
+public class BuildingRepositoryImpl implements BuildingRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
 	@Override
-	public List<BuildingEntity> findAll(BuildingSearchBuilder buildingSearchBuilder) {
+	public List<BuildingEntity> findAll(BuildingSearchBuilder buildingSearchBuilder){
 		//JPQL: JPA Query Language
-//		String sql = "FROM BuildingEntity b WHERE b.districtid = 1";
-//		Query query = entityManager.createQuery(sql, BuildingEntity.class);
+		String sql = "FROM BuildingEntity b WHERE b.name like '%building%' ";
+		Query query = entityManager.createQuery(sql,BuildingEntity.class);
 		
 		//Sql native
-		String sql = "SELECT * FROM building b WHERE b.name like '%building' ";
-		Query query = entityManager.createNativeQuery(sql, BuildingEntity.class);
+//		String sql = "SELECT * FROM building b WHERE b.name like '%building%' ";
+//		Query query = entityManager.createNativeQuery(sql,BuildingEntity.class);
 		return query.getResultList();
 	}
-
 }

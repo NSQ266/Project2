@@ -20,7 +20,7 @@ public class BuildingEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	@Column(name = "name")
 	private String name;
@@ -50,59 +50,74 @@ public class BuildingEntity {
 	public List<RentAreaEntity> getAreaEntities() {
 		return areaEntities;
 	}
+
 	public void setAreaEntities(List<RentAreaEntity> areaEntities) {
 		this.areaEntities = areaEntities;
 	}
-	
+
 	public DistrictEntity getDistrict() {
 		return district;
 	}
+
 	public void setDistrict(DistrictEntity district) {
 		this.district = district;
 	}
-	
-	public Long getId() {
+
+	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+
+	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getWard() {
 		return ward;
 	}
+
 	public void setWard(String ward) {
 		this.ward = ward;
 	}
+
 	public String getStreet() {
 		return street;
 	}
+
 	public void setStreet(String street) {
 		this.street = street;
 	}
+
 	public String getManagerName() {
 		return managerName;
 	}
+
 	public void setManagerName(String managerName) {
 		this.managerName = managerName;
 	}
+
 	public String getManagerPhoneNumber() {
 		return managerPhoneNumber;
 	}
+
 	public void setManagerPhoneNumber(String managerPhoneNumber) {
 		this.managerPhoneNumber = managerPhoneNumber;
 	}
-	
+
 	public Long getRentPrice() {
 		return rentPrice;
 	}
+
 	public void setRentPrice(Long rentPrice) {
 		this.rentPrice = rentPrice;
 	}
+
+	
 }

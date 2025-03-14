@@ -16,7 +16,8 @@ import com.javaweb1.repository.entity.BuildingEntity;
 import com.javaweb1.service.BuildingService;
 
 @Service
-public class BuildingServiceImpl implements BuildingService{
+public class BuildingServiceImpl implements BuildingService {
+	
 	@Autowired
 	private BuildingRepository buildingRepository;
 	
@@ -27,11 +28,11 @@ public class BuildingServiceImpl implements BuildingService{
 	private BuildingSearchBuilderConverter buildingSearchBuilderConverter;
 	
 	@Override
-	public List<BuildingDTO> findAll(Map<String, Object> params, List<String> typeCode) {
+	public List<BuildingDTO> findAll(Map<String, Object> params, List<String> typeCode){
 		BuildingSearchBuilder buildingSearchBuilder = buildingSearchBuilderConverter.toBuildingSearchBuilder(params, typeCode);
 		List<BuildingEntity> buildingEntities = buildingRepository.findAll(buildingSearchBuilder);
 		List<BuildingDTO> result = new ArrayList<BuildingDTO>();
-		for(BuildingEntity item : buildingEntities) {
+		for (BuildingEntity item : buildingEntities) {
 			BuildingDTO building = buildingDTOConverter.toBuildingDTO(item);
 			result.add(building);
 		}

@@ -6,7 +6,7 @@ public class BuildingDTO {
 	private String managerName;
 	private String managerPhoneNumber;
 	private Long floorArea;
-	private String rentArea; //"100,200,300"
+	private String rentArea; 
 	private String emptyArea;
 	private Long rentPrice;
 	private String serviceFee;

@@ -18,19 +18,6 @@ public class RentAreaEntity {
 	
 	@Column(name = "value")
 	private String value;
-	
-	@ManyToOne
-	@JoinColumn(name = "buildingid")
-	private BuildingEntity building;
-	
-	
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public BuildingEntity getBuilding() {
 		return building;
@@ -40,6 +27,18 @@ public class RentAreaEntity {
 		this.building = building;
 	}
 
+	@ManyToOne
+	@JoinColumn(name = "buildingid")
+	private BuildingEntity building;
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getValue() {
 		return value;
 	}
@@ -47,6 +46,7 @@ public class RentAreaEntity {
 	public void setValue(String value) {
 		this.value = value;
 	}
+	
 	
 	
 }
